@@ -1,12 +1,12 @@
 import React from 'react';
-import BaseScene from './scene/BaseScene';
 import { Text, View } from 'react-native';
+import RouteApp from './Route';
 
 const App: React.FC = () => {
   return (
-    <BaseScene header={{ title: 'App' }}>
-      <View><Text>Hello, World!</Text></View>
-    </BaseScene>
+    <>
+      <RouteApp />
+    </>
   )
 }
 
