@@ -5,22 +5,50 @@ import BaseScene from './_BaseScene';
 import { ColorApp } from '../util/color';
 import { RootStackParamList } from '../Route';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { useStore } from '../store';
+import { observer } from 'mobx-react-lite'
+import TextInputApp from '../component/TextInput';
 
 type AProp = {
-    navigation: StackNavigationProp<RootStackParamList, 'Detail'>
+    navigation: StackNavigationProp<RootStackParamList, 'AScene'>
 }
 const AScene: React.FC<AProp> = ({ navigation }) => {
+    const counterStore = useStore("counterStore")
+    const inputStore = useStore("textInputStore")
 
+    const add = () => {
+        counterStore.increaseTimer()
+    }
     return (
         <BaseScene>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ color: ColorApp.primary, fontWeight: 'bold', fontSize: 24 }}>A Secene</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                    <Text>A Scene</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+                    <Text>A Scene {counterStore.value}</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => add()}>
+                    <Text>A Scene {counterStore.value}</Text>
+                </TouchableOpacity>
+                {counterStore.getData ? <Text>Masuk</Text> : null}
+
+
+                <View style={{ height: 40 }} />
+                <View style={{ paddingHorizontal: 10, width: '100%' }}>
+                    <TextInputApp model='email-address' name='name' />
+                    <TextInputApp
+                        label='Alamat Rumah'
+                        model='phone-pad'
+                        name='addres'
+                        placeholder='Masukan Alamat'
+                        validation={["minlength_6", 'email']} />
+                </View>
+                <TouchableOpacity onPress={() => inputStore.onCheckError()}>
+                    <Text>Submit sdfa</Text>
                 </TouchableOpacity>
             </View>
         </BaseScene>
     )
 }
 
-export default AScene
+export default observer(AScene)

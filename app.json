@@ -1,4 +1,20 @@
 {
   "name": "MyApp",
-  "displayName": "MyApp"
+  "displayName": "MyApp",
+  "android": {
+    "package": "com.myapp.android",
+    "versionCode": 1,
+    "mode": {
+      "staging": {
+        "package": "com.myapp.staging",
+        "versionCode": 2
+      },
+      "production": {
+        "package": "com.myapp.production",
+        "versionCode": 3
+      }
+    }
+  }
+  
 }
+

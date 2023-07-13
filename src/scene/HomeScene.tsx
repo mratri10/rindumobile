@@ -1,29 +1,39 @@
 import React from 'react';
 
-import { Image, Text, View, TouchableOpacity } from 'react-native';
-import { infoIcon, splashImage } from '../util/picture';
+import { Text, View, TouchableOpacity } from 'react-native';
 import BaseScene from './_BaseScene';
 import { ColorApp } from '../util/color';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Route';
+import { useStore } from '../store';
+import { observer } from 'mobx-react-lite'
 
 type HomeProp = {
-    navigation: StackNavigationProp<RootStackParamList, 'Home'>
+    navigation: StackNavigationProp<RootStackParamList, 'HomeScreen'>
 }
 const HomeScreen: React.FC<HomeProp> = ({ navigation }) => {
 
-    const rightHeader = <Image source={infoIcon} style={{ width: 30, height: 30 }} />
+    const counterStore = useStore("counterStore")
+
+    const add = () => {
+        counterStore.increaseTimer()
+    }
     return (
         <BaseScene>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ color: ColorApp.primary, fontWeight: 'bold', fontSize: 24 }}>Home Secene</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
+                <TouchableOpacity onPress={() => add()}>
                     <Text>A Scene</Text>
+                    <Text>vallue {counterStore.value}</Text>
+                </TouchableOpacity>
 
+                <TouchableOpacity onPress={() => navigation.navigate('AScene')}>
+                    <Text>A Scene</Text>
+                    <Text>detail {counterStore.value}</Text>
                 </TouchableOpacity>
             </View>
         </BaseScene>
     )
 }
 
-export default HomeScreen
+export default observer(HomeScreen)

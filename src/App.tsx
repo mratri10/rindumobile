@@ -1,13 +1,13 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import RouteApp from './Route';
+import { StoresProvider, stores } from './store';
 
 const App: React.FC = () => {
   return (
-    <>
+    <StoresProvider value={stores}>
       <RouteApp />
-    </>
+    </StoresProvider>
   )
 }
 
-export default App
+export default (App)
