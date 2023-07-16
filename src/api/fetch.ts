@@ -30,12 +30,18 @@ const fetchAPI = async (url: string, token: string, type: model, params?: any) =
                 console.info("<<<<<<<<<<<<<< DATA >>>>>>>>>>>>>", data.data)
                 return data.data
             }).catch(error => {
-                if (error.response && error.response.status === 400) {
-                    console.info("<<<<<<<<<<<<<< 400 >>>>>>>>>>>>>", error.response.config)
-                    return error.response.data
-                } else {
-                    console.info("<<<<<<<<<<<<<< ERROR >>>>>>>>>>>>>", error)
+                switch (error.response && error.response.status) {
+                    case 400:
+                        console.info("<<<<<<<<<<<<<< 400 >>>>>>>>>>>>>", error.response.config)
+                        return error.response.data
+                    case 401:
+                        console.info("<<<<<<<<<<<<<< 401 >>>>>>>>>>>>>", error.response.config)
+                        return error.response.data
+                    default:
+                        console.info("<<<<<<<<<<<<<< ERROR >>>>>>>>>>>>>", error)
+                        break;
                 }
+
             })
         default:
             break;

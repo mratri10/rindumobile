@@ -4,21 +4,27 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack';
 import * as React from 'react';
-import HomeScreen from './scene/HomeScreen';
 import AScene from './scene/AScene';
 import {ColorApp} from './util/color';
-import {BackHandler, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import AuthScreen from './scene/AuthScreen';
 import SplashScreen from './scene/SplashScreen';
-import PasswordScreen from './scene/PasswordScreen';
-import {useStore} from './store';
+import SignUpScreen from './scene/SignUpScreen';
+import SignInScreen from './scene/SignInScreen';
+import MainScreen from './scene/MainScreen/MainScreen';
+import EditUserScreen from './scene/EditUserScreen';
 
+export type BottomKey = 'home' | 'transaction' | 'profile';
 export type RootStackParamList = {
   SplashScreen: undefined;
   AuthScreen: undefined;
-  PasswordScreen: undefined;
-  HomeScreen: undefined;
+  SignUpScreen: undefined;
+  SignInScreen: undefined;
+  MainScreen: {
+    selected: BottomKey;
+  };
   AScene: undefined;
+  EditUserScreen: undefined;
 };
 export type PropScreen = {
   navigation: StackNavigationProp<RootStackParamList>;
@@ -31,6 +37,7 @@ function RouteApp() {
     headerMode: 'float',
     headerTitleAlign: 'center',
     headerTitleStyle: styles.titleHeader,
+    headerTintColor: ColorApp.dark,
   };
   const notHeader: any = {headerShown: false};
   const splashOnly: any = {headerShown: false, headerMode: 'float'};
@@ -49,19 +56,32 @@ function RouteApp() {
             options={notHeader}
           />
           <Stack.Screen
-            name="PasswordScreen"
-            component={PasswordScreen}
+            name="SignUpScreen"
+            component={SignUpScreen}
             options={notHeader}
           />
           <Stack.Screen
-            name="HomeScreen"
-            component={HomeScreen}
+            name="SignInScreen"
+            component={SignInScreen}
+            options={notHeader}
+          />
+          <Stack.Screen
+            name="MainScreen"
+            component={MainScreen}
+            initialParams={{selected: 'home'}}
+            options={notHeader}
+          />
+          <Stack.Screen
+            name="EditUserScreen"
+            component={EditUserScreen}
             options={notHeader}
           />
           <Stack.Screen
             name="AScene"
             component={AScene}
-            options={baseOptions}
+            options={{
+              title: '',
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
@@ -74,8 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: ColorApp.primary,
   },
   titleHeader: {
-    color: ColorApp.light,
-    fontWeight: 'bold',
+    color: ColorApp.dark,
     fontSize: 20,
   },
 });

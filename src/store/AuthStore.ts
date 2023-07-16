@@ -22,7 +22,25 @@ class AuthStore {
                     this.respon = data
                 })
             }
+        }).catch(error => {
+            runInAction(() => {
+                this.respon_error = error
+            })
 
+        })
+    }
+
+    postSignIn(params: any) {
+        fetchAPI('signin', '', 'POST', params).then(data => {
+            if (data.status != 200) {
+                runInAction(() => {
+                    this.respon_error = data
+                })
+            } else {
+                runInAction(() => {
+                    this.respon = data
+                })
+            }
         }).catch(error => {
             runInAction(() => {
                 this.respon_error = error

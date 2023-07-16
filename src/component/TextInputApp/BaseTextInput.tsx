@@ -1,5 +1,5 @@
 import React from 'react';
-import {Control, Controller, FieldValues, useForm} from 'react-hook-form';
+import {Control, Controller} from 'react-hook-form';
 import {
   StyleProp,
   Text,
@@ -16,7 +16,7 @@ export type BaseInputType = {
   validation?: any;
   defaultValue?: string;
   control: Control<any>;
-  error?: any;
+  error: any;
   inputStyle?: StyleProp<TextStyle>;
   viewStyle?: StyleProp<ViewStyle>;
   contentStyle?: StyleProp<ViewStyle>;

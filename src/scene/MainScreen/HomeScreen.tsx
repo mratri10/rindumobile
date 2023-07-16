@@ -1,16 +1,16 @@
 import React from 'react';
 
 import {Text, View, TouchableOpacity} from 'react-native';
-import BaseScene from './_BaseScene';
-import {ColorApp} from '../util/color';
+import BaseScene from '../_BaseScene';
+import {ColorApp} from '../../util/color';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '../Route';
-import {useStore} from '../store';
+import {RootStackParamList} from '../../Route';
+import {useStore} from '../../store';
 import {observer} from 'mobx-react-lite';
-import {CLearLocal} from '../util/localStorage';
+import {CLearLocal} from '../../util/localStorage';
 
 type HomeProp = {
-  navigation: StackNavigationProp<RootStackParamList, 'HomeScreen'>;
+  navigation: StackNavigationProp<RootStackParamList>;
 };
 const HomeScreen: React.FC<HomeProp> = ({navigation}) => {
   const counterStore = useStore('counterStore');

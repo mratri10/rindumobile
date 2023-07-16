@@ -25,7 +25,7 @@ function SplashScreen({navigation}: PropScreen) {
   const dataLocal = () => {
     UseLocal('token').then(value => {
       if (value) {
-        navigation.replace('HomeScreen');
+        navigation.replace('MainScreen', {selected: 'home'});
       } else {
         navigation.replace('AuthScreen');
       }
@@ -52,12 +52,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    color: ColorApp.light,
+    color: ColorApp.dark,
     fontSize: 28,
     fontWeight: 'bold',
   },
   describe: {
-    color: ColorApp.light,
+    color: ColorApp.dark,
     fontSize: 14,
   },
 });

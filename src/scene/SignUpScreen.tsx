@@ -23,7 +23,7 @@ type Inputs = {
   password: string;
   password_confirm: string;
 };
-function PasswordScreen({navigation}: PropScreen) {
+function SignUpScreen({navigation}: PropScreen) {
   const authStore = useStore('authStore');
   const appStore = useStore('appStore');
 
@@ -53,7 +53,7 @@ function PasswordScreen({navigation}: PropScreen) {
   React.useEffect(() => {
     if (authStore.respon) {
       SaveLocal('token', authStore.respon);
-      navigation.replace('HomeScreen');
+      navigation.replace('MainScreen', {selected: 'home'});
     }
   }, [authStore.respon]);
 
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   btn: {
-    backgroundColor: ColorApp.light,
+    backgroundColor: ColorApp.dark,
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 10,
@@ -165,4 +165,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default observer(PasswordScreen);
+export default observer(SignUpScreen);

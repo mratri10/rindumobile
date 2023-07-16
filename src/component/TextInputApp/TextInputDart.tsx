@@ -19,8 +19,8 @@ function TextInputDart(data: BaseInputType) {
         contentStyle={[styles.content, styles.contentLight]}
         errorStyle={[styles.error]}
         viewStyle={styles.view}
-        inputStyle={styles.input}
-        placeHolderColor={ColorApp.light_input}
+        inputStyle={[styles.input, data.inputStyle]}
+        placeHolderColor={ColorApp.dark_input}
         content={
           data.setSecure ? (
             <SecureView isSecure={data.isSecure} onPress={data.onSecure} />
@@ -41,7 +41,7 @@ const SecureView = ({isSecure, onPress}: SecureType) => {
       <Image
         source={isSecure ? eyeHide : eye}
         style={styles.imageSecure}
-        tintColor={ColorApp.light}
+        tintColor={ColorApp.dark}
       />
     </TouchableOpacity>
   );
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   contentLight: {
-    borderColor: ColorApp.light,
+    borderColor: ColorApp.dark,
   },
   error: {
     fontSize: 12,
@@ -69,12 +69,12 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    color: ColorApp.light,
+    color: ColorApp.dark,
     fontWeight: 'bold',
     marginBottom: 5,
   },
   input: {
-    color: ColorApp.light,
+    color: ColorApp.dark,
     flex: 1,
   },
   imageSecure: {

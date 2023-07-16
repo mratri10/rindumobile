@@ -4,6 +4,7 @@ import textInputStore from "./TextInputStore";
 import appStore from "./AppStore";
 import addressStore from "./AddressStore"
 import authStore from "./AuthStore"
+import profileStore from "./ProfileStore";
 
 
 export const stores = Object.freeze({
@@ -11,7 +12,8 @@ export const stores = Object.freeze({
     textInputStore,
     appStore,
     addressStore,
-    authStore
+    authStore,
+    profileStore
 });
 
 export const storeContext = React.createContext(stores);

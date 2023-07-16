@@ -30,7 +30,7 @@ function AuthScreen({navigation}: PropScreen) {
 
   const submitAuth: SubmitHandler<Inputs> = data => {
     appStore.setUsername(data.username);
-    navigation.navigate('PasswordScreen');
+    navigation.navigate('SignInScreen');
   };
 
   return (
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   btn: {
-    backgroundColor: ColorApp.light,
+    backgroundColor: ColorApp.dark,
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 10,

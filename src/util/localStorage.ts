@@ -1,12 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
-export const SaveLocal = async (key: string, value: any) => {
+type KeyType = 'token' | 'user'
+export const SaveLocal = async (key: KeyType, value: any) => {
     await AsyncStorage.setItem(key, JSON.stringify(value))
 }
 
-export const UseLocal = async (key: string) => {
+export const UseLocal = async (key: KeyType) => {
     return await AsyncStorage.getItem(key).then(value => {
-        return JSON.parse(JSON.stringify(value))
+        console.log("<<<<<<<<<<<< LOCAL STORAGE >>>>>>>>>>>>>>>>>>", value)
+        return value
     }).catch(error => {
         console.log("<<<<<<<<<<<< ERROR LOCAL STORAGE >>>>>>>>>>>>>>>>>>", error)
     })
