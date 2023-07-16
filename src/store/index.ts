@@ -1,11 +1,17 @@
 import React from "react";
 import counterStore from "./CounterStore";
 import textInputStore from "./TextInputStore";
+import appStore from "./AppStore";
+import addressStore from "./AddressStore"
+import authStore from "./AuthStore"
 
 
 export const stores = Object.freeze({
     counterStore,
-    textInputStore
+    textInputStore,
+    appStore,
+    addressStore,
+    authStore
 });
 
 export const storeContext = React.createContext(stores);

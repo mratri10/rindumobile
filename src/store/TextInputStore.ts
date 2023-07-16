@@ -91,7 +91,6 @@ class TextInputStore {
     handleAddError(message: string, name: string) {
         const messAllData: string[] = this.value['error_all'] ?? []
         const messageFormat = name + "_" + message
-        console.log("+++++++++ 1234", messAllData)
         messAllData.push(messageFormat)
         this.value = { ...this.value, error_all: messAllData }
     }
@@ -99,7 +98,6 @@ class TextInputStore {
     handleRemoveError(message: string, name: string) {
         const messAllData: string[] = this.value['error_all'] ?? []
         const messageFormat = name + "_" + message
-        console.log("+++++++++ 12345", messAllData)
         const indexAll = messAllData.indexOf(messageFormat);
         messAllData.splice(indexAll, 1)
         this.value = { ...this.value, error_all: messAllData }
@@ -108,6 +106,12 @@ class TextInputStore {
 
     onCheckError() {
         this.checkError = !this.checkError
+    }
+
+    onReset() {
+        this.value = { error_all: [] }
+        this.checkError = false;
+        this.numError = 0
     }
 
 
