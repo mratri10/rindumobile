@@ -1,5 +1,5 @@
 import React from 'react';
-import {Control, Controller} from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
 import {
   StyleProp,
   Text,
@@ -8,10 +8,10 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {observer} from 'mobx-react-lite';
-import {useStore} from '../../store';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store';
 
-export type BaseInputType = {
+export type BaseInputTextType = {
   name: string;
   validation?: any;
   defaultValue?: string;
@@ -43,7 +43,7 @@ function BaseTextInput({
   placeHolder,
   placeHolderColor,
   isSecure,
-}: BaseInputType) {
+}: BaseInputTextType) {
   const appStore = useStore('appStore');
   return (
     <View style={viewStyle}>
@@ -51,7 +51,7 @@ function BaseTextInput({
         <Controller
           control={control}
           rules={validation}
-          render={({field: {onChange, onBlur, value}}) => (
+          render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
               onChangeText={onChange}
               onBlur={onBlur}

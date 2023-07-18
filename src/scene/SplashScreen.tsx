@@ -1,31 +1,32 @@
-import React, {useEffect} from 'react';
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
-import {minangImage} from '../util/picture';
-import {ColorApp} from '../util/color';
-import {PropScreen} from '../Route';
-import {observer} from 'mobx-react-lite';
-import {useStore} from '../store';
-import {UseLocal} from '../util/localStorage';
+import React, { useEffect } from 'react';
+import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
+import { minangImage } from '../util/picture';
+import { ColorApp } from '../util/color';
+import { PropScreen } from '../Route';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../store';
+import { UseLocal } from '../util/localStorage';
 
 const FULL_WIDTH = Dimensions.get('screen').width;
 
-function SplashScreen({navigation}: PropScreen) {
+function SplashScreen({ navigation }: PropScreen) {
   const addressStore = useStore('addressStore');
-  useEffect(() => {
-    addressStore.getDataProvince();
-  }, []);
+  // useEffect(() => {
+  //   addressStore.getDataProvince();
+  // }, []);
   useEffect(() => {
     setTimeout(() => {
-      if (addressStore.dataProvince.length > 0) {
-        dataLocal();
-      }
+      dataLocal();
+      // if (addressStore.dataProvince.length > 0) {
+      //   dataLocal();
+      // }
     }, 3000);
   }, [addressStore.dataProvince]);
 
   const dataLocal = () => {
     UseLocal('token').then(value => {
       if (value) {
-        navigation.replace('MainScreen', {selected: 'home'});
+        navigation.replace('MainScreen', { selected: 'home' });
       } else {
         navigation.replace('AuthScreen');
       }
@@ -35,7 +36,7 @@ function SplashScreen({navigation}: PropScreen) {
     <View style={styles.main}>
       <Image
         source={minangImage}
-        style={{width: FULL_WIDTH - 80, height: FULL_WIDTH - 80}}
+        style={{ width: FULL_WIDTH - 80, height: FULL_WIDTH - 80 }}
       />
       <Text style={styles.title}>Rindu App</Text>
       <Text style={styles.describe}>

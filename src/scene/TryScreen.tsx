@@ -7,32 +7,30 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import { ColorApp } from '../util/color';
-import { observer } from 'mobx-react-lite';
-import { minangImage } from '../util/picture';
-import { PropScreen } from '../Route';
+import {ColorApp} from '../util/color';
+import {observer} from 'mobx-react-lite';
+import {minangImage} from '../util/picture';
+import {PropScreen} from '../Route';
 import TextInputDart from '../component/TextInputApp/TextInputDart';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { NOSPASI, REQUIRED } from '../util/validation';
-import { useStore } from '../store';
-import DateInputApp from '../component/InputApp/DateInputApp';
+import {SubmitHandler, useForm} from 'react-hook-form';
+import {NOSPASI, REQUIRED} from '../util/validation';
+import {useStore} from '../store';
 
 const FULL_WIDTH = Dimensions.get('screen').width;
 type Inputs = {
   username: string;
 };
-function AuthScreen({ navigation }: PropScreen) {
+function AuthScreen({navigation}: PropScreen) {
   const appStore = useStore('appStore');
   const {
     control,
-    formState: { errors },
+    formState: {errors},
     handleSubmit,
   } = useForm<Inputs>();
 
   const submitAuth: SubmitHandler<Inputs> = data => {
-    // appStore.setUsername(data.username);
-    // navigation.navigate('SignInScreen');
-    console.log("++++++++++++ ", data)
+    appStore.setUsername(data.username);
+    navigation.navigate('SignInScreen');
   };
 
   return (
@@ -41,13 +39,13 @@ function AuthScreen({ navigation }: PropScreen) {
       <View style={styles.content}>
         <Image
           source={minangImage}
-          style={{ width: FULL_WIDTH - 160, height: FULL_WIDTH - 160 }}
+          style={{width: FULL_WIDTH - 160, height: FULL_WIDTH - 160}}
         />
         <Text style={styles.titleText}>Rindu Kampuang</Text>
         <Text style={styles.describeText}>Ayo Bekarir Dari Kampuang</Text>
-        <View style={{ height: 20 }} />
+        <View style={{height: 20}} />
       </View>
-      <View style={{ padding: 20 }}>
+      <View style={{padding: 20}}>
         <TextInputDart
           label="Username"
           name="username"
@@ -56,8 +54,6 @@ function AuthScreen({ navigation }: PropScreen) {
           error={errors}
           placeHolder="Masukan Username Anda"
         />
-
-        <DateInputApp name='DatePicker' control={control} error={errors} />
         <TouchableOpacity style={styles.btn} onPress={handleSubmit(submitAuth)}>
           <Text style={styles.titleBtn}> Masuk </Text>
         </TouchableOpacity>
