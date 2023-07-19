@@ -1,6 +1,8 @@
 import React from 'react';
-import { Control, Controller } from 'react-hook-form';
+import {Control, Controller} from 'react-hook-form';
 import {
+  Image,
+  ImageSourcePropType,
   StyleProp,
   Text,
   TextInput,
@@ -8,8 +10,9 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { observer } from 'mobx-react-lite';
-import { useStore } from '../../store';
+import {observer} from 'mobx-react-lite';
+import {useStore} from '../../store';
+import {ColorApp} from '../../util/color';
 
 export type BaseInputTextType = {
   name: string;
@@ -28,6 +31,7 @@ export type BaseInputTextType = {
   isSecure?: boolean;
   onSecure?: () => void;
   setSecure?: boolean;
+  icon?: ImageSourcePropType;
 };
 function BaseTextInput({
   name,
@@ -43,15 +47,30 @@ function BaseTextInput({
   placeHolder,
   placeHolderColor,
   isSecure,
+  icon,
 }: BaseInputTextType) {
   const appStore = useStore('appStore');
   return (
     <View style={viewStyle}>
       <View style={contentStyle}>
+        {icon ? (
+          <View
+            style={{
+              backgroundColor: ColorApp.dark,
+              padding: 5,
+              borderRadius: 10,
+              marginVertical: 10,
+            }}>
+            <Image
+              source={icon}
+              style={{height: 20, width: 20, tintColor: ColorApp.light}}
+            />
+          </View>
+        ) : null}
         <Controller
           control={control}
           rules={validation}
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({field: {onChange, onBlur, value}}) => (
             <TextInput
               onChangeText={onChange}
               onBlur={onBlur}

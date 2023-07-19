@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import BaseTextInput, { BaseInputTextType } from './BaseTextInput';
-import { ColorApp } from '../../util/color';
-import { useStore } from '../../store';
-import { observer } from 'mobx-react-lite';
-import { eye, eyeHide } from '../../util/picture';
+import React, {useEffect, useState} from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import BaseTextInput, {BaseInputTextType} from './BaseTextInput';
+import {ColorApp} from '../../util/color';
+import {useStore} from '../../store';
+import {observer} from 'mobx-react-lite';
+import {eye, eyeHide} from '../../util/picture';
 
 function TextInputDart(data: BaseInputTextType) {
   const appStore = useStore('appStore');
@@ -35,7 +35,7 @@ type SecureType = {
   isSecure?: boolean;
   onPress?: () => void;
 };
-const SecureView = ({ isSecure, onPress }: SecureType) => {
+const SecureView = ({isSecure, onPress}: SecureType) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <Image
@@ -64,9 +64,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
     textAlign: 'center',
   },
-  view: {
-    marginBottom: 10,
-  },
+  view: {},
   label: {
     fontSize: 14,
     color: ColorApp.dark,

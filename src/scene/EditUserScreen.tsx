@@ -9,7 +9,13 @@ import {
 } from 'react-native';
 import {observer} from 'mobx-react-lite';
 import {ColorApp} from '../util/color';
-import {cameraIcon, closeIcon} from '../util/picture';
+import {
+  cakeIcon,
+  cameraIcon,
+  closeIcon,
+  femaleMaleIcon,
+  profileIcon,
+} from '../util/picture';
 import {useStore} from '../store';
 import {UserDataType, initResponProfile} from '../store/ProfileStore';
 import {PropScreen, RootStackParamList} from '../Route';
@@ -18,6 +24,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import TextInputDart from '../component/TextInputApp/TextInputDart';
 import {Control, FieldErrors, SubmitHandler, useForm} from 'react-hook-form';
 import {NOSPASI, REQUIRED} from '../util/validation';
+import DateInputApp, {convertDate} from '../component/InputApp/DateInputApp';
+import DropDownInput from '../component/InputApp/DropDownInput';
 
 type InputUser = {
   name: string;
@@ -37,6 +45,7 @@ function EditProfileScreen({navigation}: PropScreen) {
   }, []);
 
   const onSubmit: SubmitHandler<InputUser> = data => {
+    console.log('++++++++ ', dataUser);
     console.log('++++++++ ', data);
   };
   return (
@@ -48,6 +57,43 @@ function EditProfileScreen({navigation}: PropScreen) {
         control={control}
         errors={errors}
       />
+      <View style={{margin: 20}}>
+        {dataUser.name ? (
+          <TextInputDart
+            name="name"
+            validation={REQUIRED}
+            control={control}
+            error={errors}
+            placeHolder={'Masukan Nama Anda'}
+            defaultValue={dataUser.name}
+            inputStyle={{textAlign: 'right', paddingVertical: 4}}
+            icon={profileIcon}
+          />
+        ) : null}
+        <View style={{height: 10}} />
+        {dataUser.birthday ? (
+          <DateInputApp
+            error={errors}
+            control={control}
+            name="birthday"
+            icon={cakeIcon}
+            validation={REQUIRED}
+            defaultValue={convertDate(dataUser.birthday)}
+          />
+        ) : null}
+        <View style={{height: 10}} />
+        {dataUser.gender ? (
+          <DropDownInput
+            content={['Pria', 'Wanita']}
+            name="gender"
+            error={errors}
+            control={control}
+            icon={femaleMaleIcon}
+            placeholder="Masukan Jenis Kelamin Anda"
+            defaultValue={dataUser.gender}
+          />
+        ) : null}
+      </View>
       <TouchableOpacity onPress={handleSubmit(onSubmit)}>
         <Text>Simpan</Text>
       </TouchableOpacity>
@@ -67,19 +113,6 @@ const TopView = ({gender, nameUser, navigation, control, errors}: TopView) => {
       <View style={styles.viewImage}>
         <Image source={cameraIcon} style={styles.imageUser} />
       </View>
-      <View style={{width: 200, marginTop: 10}}>
-        {nameUser ? (
-          <TextInputDart
-            name="name"
-            validation={REQUIRED}
-            control={control}
-            error={errors}
-            placeHolder={'Masukan Nama Anda'}
-            defaultValue={nameUser}
-            inputStyle={{textAlign: 'center', paddingVertical: 4}}
-          />
-        ) : null}
-      </View>
       <TouchableOpacity
         style={styles.cancelEdit}
         onPress={() => navigation.goBack()}>
@@ -95,12 +128,11 @@ const styles = StyleSheet.create({
     backgroundColor: ColorApp.light,
   },
   topContent: {
-    height: 200,
     backgroundColor: ColorApp.primary,
-    justifyContent: 'center',
     alignItems: 'center',
-    borderBottomEndRadius: 20,
-    borderBottomStartRadius: 20,
+    paddingHorizontal: 20,
+    paddingTop: 40,
+    paddingBottom: 10,
   },
   bottomContent: {
     flex: 1,
@@ -112,8 +144,8 @@ const styles = StyleSheet.create({
     tintColor: ColorApp.dark,
   },
   viewImage: {
-    width: 80,
-    height: 80,
+    width: 60,
+    height: 60,
     borderRadius: 50,
     borderWidth: 1,
     borderColor: ColorApp.dark,

@@ -9,12 +9,15 @@ import {
 } from 'react-native';
 import {ColorApp} from '../util/color';
 import {observer} from 'mobx-react-lite';
-import {minangImage} from '../util/picture';
+import {locationIcon, minangImage} from '../util/picture';
 import {PropScreen} from '../Route';
 import TextInputDart from '../component/TextInputApp/TextInputDart';
 import {SubmitHandler, useForm} from 'react-hook-form';
 import {NOSPASI, REQUIRED} from '../util/validation';
 import {useStore} from '../store';
+import DropDownInput, {
+  ConvertStringArray,
+} from '../component/InputApp/DropDownInput';
 
 const FULL_WIDTH = Dimensions.get('screen').width;
 type Inputs = {
@@ -22,6 +25,7 @@ type Inputs = {
 };
 function AuthScreen({navigation}: PropScreen) {
   const appStore = useStore('appStore');
+  const addressStore = useStore('addressStore');
   const {
     control,
     formState: {errors},
@@ -54,6 +58,7 @@ function AuthScreen({navigation}: PropScreen) {
           error={errors}
           placeHolder="Masukan Username Anda"
         />
+
         <TouchableOpacity style={styles.btn} onPress={handleSubmit(submitAuth)}>
           <Text style={styles.titleBtn}> Masuk </Text>
         </TouchableOpacity>

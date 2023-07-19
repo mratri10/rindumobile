@@ -17,6 +17,14 @@ export const editIcon = require('../asset/edit.png')
 //EditUserScreen
 export const cameraIcon = require('../asset/camera.png')
 export const closeIcon = require('../asset/close.png')
+export const cakeIcon = require('../asset/cake.png')
+export const locationIcon = require('../asset/location.png')
+export const femaleMaleIcon = require('../asset/female_male.png')
+
+//DropDownInput
+export const arrowUpIcon = require('../asset/up_arrow.png')
+export const arrowBelowIcon = require('../asset/below_arrow.png')
+
 
 export const splashImage = require('../asset/splash_market.svg')
 export const minangImage = require('../asset/minang.png')
